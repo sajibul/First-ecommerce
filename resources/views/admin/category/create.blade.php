@@ -11,19 +11,18 @@
           </button>
         </div>
         <div class="modal-body">
-        <form action="{{url('backend/category')}}" method="POST" id="addCategoryForm">
+        <form action="{{route('category.store')}}" method="POST" id="addCategoryForm">
          @csrf
         <div class="form-row">
           <div class="form-group col-md-12">
-            <label for="inputEmail4">Category Name</label>
-            <input type="text" name="category" id="name" class="form-control" id="inputEmail4" placeholder="Enter category name">
+            <label for="category_name">Category Name</label>
+            <input type="text" name="category_name"  id="category_name" class="form-control"  placeholder="Enter category name">
           </div>
         </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" id="submit"  class="btn btn-primary">Submit</button>
-          {{-- <button type="submt" onclick="updateCategory()"  class="btn btn-primary">Update</button> --}}
+          <button type="submit"   class="btn btn-primary">Submit</button>
         </div>
       </form>
       </div>

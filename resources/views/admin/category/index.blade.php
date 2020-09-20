@@ -59,7 +59,7 @@
               <div class="card-body" id="categoryList">
 
                 @include('admin/category/allCategory')
-                
+
               </div>
               {{$categories->links()}}
             </div>
@@ -78,15 +78,18 @@
 @push('js')
 
 
-<script> 
+<script>
     $(function() {
       // Data insert with Ajax
+
       $("#addCategoryForm").on("submit", function(e) {
         e.preventDefault();
         var form = $(this);
         var url = form.attr("action");
         var type = form.attr("method");
         var data = form.serialize();
+
+        console.log(url);
         $.ajax({
 
           url: url,
@@ -100,9 +103,9 @@
           success: function (data) {
             $("#categoryModal").modal('hide');
             form[0].reset();
-          $.get("{{route('allcategory')}}",function(data){
+            $.get("{{route('allcategory')}}",function(data){
               $("#categoryList").empty().html(data);
-              Swal.fire('Good job!','Category Created!','success');
+              Swal.fire('Good job!','Category Update!','success');
             });
 				},
             complete:function(){
@@ -115,11 +118,14 @@
 
 
 
+
+
+
         //edit category with Ajax
         $(document).on("click","#edit",function(e){
           e.preventDefault();
           var id = $(this).data("id");
-          var url = $(this).attr("href"); 
+          var url = $(this).attr("href");
 
           $.ajax({
             url:url,
@@ -137,7 +143,7 @@
         });
 
 
-    //update category with ajax 
+    //update category with ajax
 
     $("#UpdateCategoryForm").on("submit", function(e) {
         e.preventDefault();
@@ -179,7 +185,7 @@
         $(document).on("click","#view",function(e){
           e.preventDefault();
           var id = $(this).data("id");
-          var url = $(this).attr("href"); 
+          var url = $(this).attr("href");
 
           $.ajax({
             url:url,
@@ -197,11 +203,11 @@
 
 
 
-         //delete data with ajax 
+         //delete data with ajax
          $(document).on("click","#delete",function(e){
           e.preventDefault();
           var id = $(this).data("id");
-          var url = $(this).attr("href"); 
+          var url = $(this).attr("href");
 
           $.ajax({
               url: url,
@@ -222,94 +228,38 @@
 
     });
 
-   
+
 
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{-- CRUD WITH Ajax --}}
+{{-- Form validation  --}}
 <script type="text/javascript">
-// insert data with Aajx
-// $(function () {
-// 		$('form').on('submit', function (e) {
-// 			e.preventDefault();
-// 			$.ajax({
-// 				type: 'post',
-// 				url:"{{route('category.store')}}",
-// 				data: $('form').serialize(),
-// 				success: function (data) {
-//           $("#categoryModal").modal('hide');
-//           $.get("{{route('allcategory')}}",function(data){
-//               $("#categoryList").empty().html(data);
-//               Swal.fire('Good job!','Category Created!','success');
-//             })
-// 				}
-// 			});
-// 		});
-// 	});
-    
-
-// edit data with Ajax
-
-// function editForm(id){
-//     $.ajax({
-//       url:"{{url('backend/category')}}" +"/"+  id + "/edit",
-//       type:"GET",
-//       dataType: "JSON",
-      
-//       success:function(data){
-//         $("#editCategoryModal").modal('toggle');
-//           console.log('hello');
-//         $("#id").val(data.id);
-//         $("#name").val(data.name);
-//       },
-//       error:function(){
-//         alert("Edit form not working properly");
-//       },
-//     });
-
-//     }
-
-
-    // update with ajax 
-//     var frm = $('#editForm');
-
-// frm.submit(function (e) {
-
-//     e.preventDefault();
-
-//     $.ajax({
-//         type: frm.attr('method'),
-//         url: frm.attr('action'),
-//         data: frm.serialize(),
-//         success: function (data) {
-//             console.log('Submission was successful.');
-//             console.log(data);
-//         },
-//         error: function (data) {
-//             console.log('An error occurred.');
-//             console.log(data);
-//         },
-//     });
-// });
+  $(document).ready(function(){
+    $('#addCategoryForm').validate({
+      rules:{
+        "category_name":{
+          required:true,
+        },
+      },
+      messages: {
+        "category_name": {
+        required: "Please enter a category name",
+      },
+      terms: "Please accept our terms"
+    },
+    errorElement: 'span',
+      errorPlacement:function(error, element){
+        error.addClass('invalid-feedback');
+        element.closest('.form-query').append(error);
+      },
+      highlight:function(element, errorClass, validClass){
+        $(element).addClass('is-invalid');
+      },
+      unhighlight:function(element,errorClass,validaClass){
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
 </script>
+
 @endpush

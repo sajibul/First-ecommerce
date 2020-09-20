@@ -96,7 +96,6 @@ class ComposerStaticInit72a17fec6b3d7b177c4ad7b3247bcd23
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Spatie\\TemporaryDirectory\\' => 26,
-            'Spatie\\PdfToImage\\' => 18,
             'Spatie\\MediaLibrary\\' => 20,
             'Spatie\\Image\\' => 13,
             'Spatie\\ImageOptimizer\\' => 22,
@@ -359,10 +358,6 @@ class ComposerStaticInit72a17fec6b3d7b177c4ad7b3247bcd23
         'Spatie\\TemporaryDirectory\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/temporary-directory/src',
-        ),
-        'Spatie\\PdfToImage\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/spatie/pdf-to-image/src',
         ),
         'Spatie\\MediaLibrary\\' => 
         array (
@@ -659,6 +654,7 @@ class ComposerStaticInit72a17fec6b3d7b177c4ad7b3247bcd23
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\Backend\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/CategoryController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Frontend\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/CartController.php',
         'App\\Http\\Controllers\\Frontend\\CheckoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/CheckoutController.php',
@@ -5283,11 +5279,6 @@ class ComposerStaticInit72a17fec6b3d7b177c4ad7b3247bcd23
         'Spatie\\MediaLibrary\\UrlGenerator\\S3UrlGenerator' => __DIR__ . '/..' . '/spatie/laravel-medialibrary/src/UrlGenerator/S3UrlGenerator.php',
         'Spatie\\MediaLibrary\\UrlGenerator\\UrlGenerator' => __DIR__ . '/..' . '/spatie/laravel-medialibrary/src/UrlGenerator/UrlGenerator.php',
         'Spatie\\MediaLibrary\\UrlGenerator\\UrlGeneratorFactory' => __DIR__ . '/..' . '/spatie/laravel-medialibrary/src/UrlGenerator/UrlGeneratorFactory.php',
-        'Spatie\\PdfToImage\\Exceptions\\InvalidFormat' => __DIR__ . '/..' . '/spatie/pdf-to-image/src/Exceptions/InvalidFormat.php',
-        'Spatie\\PdfToImage\\Exceptions\\InvalidLayerMethod' => __DIR__ . '/..' . '/spatie/pdf-to-image/src/Exceptions/InvalidLayerMethod.php',
-        'Spatie\\PdfToImage\\Exceptions\\PageDoesNotExist' => __DIR__ . '/..' . '/spatie/pdf-to-image/src/Exceptions/PageDoesNotExist.php',
-        'Spatie\\PdfToImage\\Exceptions\\PdfDoesNotExist' => __DIR__ . '/..' . '/spatie/pdf-to-image/src/Exceptions/PdfDoesNotExist.php',
-        'Spatie\\PdfToImage\\Pdf' => __DIR__ . '/..' . '/spatie/pdf-to-image/src/Pdf.php',
         'Spatie\\TemporaryDirectory\\TemporaryDirectory' => __DIR__ . '/..' . '/spatie/temporary-directory/src/TemporaryDirectory.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',

@@ -43,7 +43,6 @@ return array(
     'Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Spatie\\TemporaryDirectory\\' => array($vendorDir . '/spatie/temporary-directory/src'),
-    'Spatie\\PdfToImage\\' => array($vendorDir . '/spatie/pdf-to-image/src'),
     'Spatie\\MediaLibrary\\' => array($vendorDir . '/spatie/laravel-medialibrary/src'),
     'Spatie\\Image\\' => array($vendorDir . '/spatie/image/src'),
     'Spatie\\ImageOptimizer\\' => array($vendorDir . '/spatie/image-optimizer/src'),
