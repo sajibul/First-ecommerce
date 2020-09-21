@@ -29,6 +29,32 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function published(Request $request){
+
+        $category = Category::find($request->id);
+        $category->status = 1;
+        $category->save();
+        return response()->json($category);
+
+
+    }
+
+
+    public function unpublished(Request $request){
+
+
+        $category = Category::find($request->id);
+        $category->status = 0;
+        $category->save();
+        return response()->json($category);
+
+    }
+
+
+
+
     public function create()
     {
         //

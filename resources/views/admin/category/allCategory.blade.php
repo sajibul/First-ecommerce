@@ -3,6 +3,8 @@
     <tr>
       <th>Sl.</th>
       <th>Category Name</th>
+      <th>Status</th>
+      <th>created_at</th>
       <th>Action</th>
     </tr>
     </thead>
@@ -14,6 +16,13 @@
     <tr>
       <td>{{$i++}}</td>
       <td>{{$data->name}}</td>
+      <td>
+        @if($data->status==1)
+        <button href="#" title="unpublished" onclick='unpublished("{{$data->id}}")' class="btn btn-sm btn-danger"><span class="fa fa-arrow-alt-circle-up"></span></button>
+        @else
+        <button href="#" title="published" onclick='published("{{$data->id}}")'  class="btn btn-sm btn-success"><span class="fa fa-arrow-alt-circle-down"></span></button>
+      @endif
+      </td>
       <td>{{ date("d-m-Y",strtotime($data->created_at))}}</td>
       <td>
       <a title="view"  id="view" href="{{route('category.show',$data->id)}}" data-id="{{$data->id}}"><i class="btn btn-sm btn-success fa fa-eye"></i></a>
@@ -27,6 +36,8 @@
     <tr>
       <th>Sl.</th>
       <th>Category Name</th>
+      <th>Status</th>
+      <th>created_at</th>
       <th>Action</th>
     </tr>
     </tfoot>

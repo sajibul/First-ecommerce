@@ -7,10 +7,13 @@ Auth::routes();
 
   Route::get('/home', 'HomeController@index')->name('home');
   Route::group(['prefix'=>'backend','namespace'=>'Backend','middleware'=>['auth']],function(){
-    Route::resource('category','CategoryController');
+  Route::resource('category','CategoryController');
+  Route::get('category/{id}/delete','CategoryController@delete')->name('category.destroy');
+  Route::get('allCategory','CategoryController@allCategory')->name('allcategory');
 
-     Route::get('category/{id}/delete','CategoryController@delete')->name('category.destroy');
-    Route::get('allCategory','CategoryController@allCategory')->name('allcategory');
+  Route::get('category-published','CategoryController@published')->name('category-published');
+  Route::get('category-unpublished','CategoryController@unpublished')->name('category-unpublished');
+
   });
 
 

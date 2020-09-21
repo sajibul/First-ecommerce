@@ -105,7 +105,7 @@
             form[0].reset();
             $.get("{{route('allcategory')}}",function(data){
               $("#categoryList").empty().html(data);
-              Swal.fire('Good job!','Category Update!','success');
+              Swal.fire('Good job!','Category Created!','success');
             });
 				},
             complete:function(){
@@ -231,6 +231,53 @@
 
 
 </script>
+
+
+
+
+{{-- unpublic status --}}
+<script type="text/javascript">
+  function unpublished(id){
+
+  var check = confirm("If you want to unpublished this category, press ok");
+      if(check){
+        $.get("{{route('category-unpublished')}}",{id},function(data){
+          $.get("{{route('allcategory')}}",function(response){
+              $("#categoryList").empty().html(response);
+              Swal.fire('Good job!','Category Status Unpublished!','success');
+            });
+          // console.log(data);
+        });
+      }
+
+  }
+</script>
+
+
+{{-- published status  --}}
+
+  <script>
+
+
+  function published(id){
+    var check = confirm("If you want to published this category , press ok");
+    if(check){
+      $.get("{{route('category-published')}}",{id},function(data){
+        $.get("{{route('allcategory')}}",function(response){
+              $("#categoryList").empty().html(response);
+              Swal.fire('Good job!','Category Status published!','success');
+            });
+          console.log(data);
+      });
+    }
+
+  }
+
+  </script>
+
+
+
+
 
 {{-- Form validation  --}}
 <script type="text/javascript">
