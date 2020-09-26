@@ -20,6 +20,7 @@
         margin: auto;
         text-align: center;
       }
+
    </style>
 @endpush
 <!--start index-->
@@ -56,6 +57,7 @@
                   </button>
               </div>
               @endif
+              <input type="text" id="searchInput" name="category" class="form-control" placeholder="Search category data">
               <div class="card-body" id="categoryList">
 
                 @include('admin/category/allCategory')
@@ -64,12 +66,13 @@
               {{$categories->links()}}
             </div>
             @include('admin.category.create')
-            {{-- @include('admin.category.edit') --}}
           </div><!-- /.card-body -->
         </div>
       </section>
     </div>
   </div><!-- /.container-fluid -->
+  {{-- pagination link  --}}
+  <div id="getDatabypagination" data-url="{{route('category-pagination')}}"></div>
   <div class="load">
     <img src="{{asset('backend')}}/4V0b.gif" class="img-fluid loading" alt="">
   </div>
@@ -219,14 +222,47 @@
               $("#categoryList").empty().html(response);
               Swal.fire('Good job!','Category Delete!','success');
             });
-                console.log(response);
+                // console.log(response);
               },
           });
-          console.log(id + "..." + url);
+          // console.log(id + "..." + url);
 
       });
 
     });
+
+
+
+
+
+//pagination with ajax 
+
+$(document).on("click",".page-link",function(e){
+  e.preventDefault();
+  var page = $(this).attr("href");
+  
+  var pagenumber = page.split("?page=")[1];
+
+  return getPagination(pagenumber);
+});
+
+
+function getPagination(pagenumber){
+  var getUrl = $("#getDatabypagination").data("url"); 
+  var url = getUrl + "?page=" + pagenumber;
+console.log(url);
+  $.ajax({
+    url: url,
+    type: "GET",
+    dataType: "HTML",
+    success: function(response){
+      $("#categoryList").html(response);
+    } 
+  });
+
+}
+
+
 
 
 
@@ -276,7 +312,83 @@
   </script>
 
 
+{{-- live search data --}}
 
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+   
+      $('#searchInput').on('keyup',function() {
+          var query = $(this).val(); 
+          $.ajax({
+             
+              url:"{{ route('category-search') }}",
+        
+              type:"GET",
+             
+              data:{'category':query},
+             
+              success:function (data) {
+                
+                  $('#searchResult').html(data);
+              }
+          })
+          // end of ajax call
+      });
+
+      
+      $(document).on('click', 'li', function(){
+        
+          var value = $(this).text();
+          $('#searchInput').val(value);
+          $('#searchResult').html("");
+      });
+  });
+</script>
+
+
+
+
+
+{{-- <script type="text/javascript">
+  $('#searchInput').on('keyup',function(){
+  $value=$(this).val();
+  $.ajax({
+  type : 'get',
+  url : '{{URL::to('backend/search-category')}}',
+  data:{url:$value},
+  success:function(data){
+    $.get("{{route('allcategory')}}",function(response){
+              $("#categoryList").html(response);
+              
+            });
+  }
+  });
+  })
+  </script> --}}
+
+{{-- <script> 
+    $(document).ready(function(){
+      $("#searchInput").on('keyup',function(){
+        var result=$(this).val();
+        if(result.length>=1){
+          url:"{{route('category-search')}}",
+          data:{
+            s:result
+          },
+          dataType:'JSON',
+          beforeSend:function(){
+            $('.searchResult').html('<td>Loading....</td>');
+          },
+          success:function(response){
+              console.log(response);
+          }
+        
+        }
+      });
+    });
+</script> --}}
 
 
 {{-- Form validation  --}}

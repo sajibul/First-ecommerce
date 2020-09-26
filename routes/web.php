@@ -6,13 +6,43 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
   Route::get('/home', 'HomeController@index')->name('home');
+
   Route::group(['prefix'=>'backend','namespace'=>'Backend','middleware'=>['auth']],function(){
+// category routes   
   Route::resource('category','CategoryController');
   Route::get('category/{id}/delete','CategoryController@delete')->name('category.destroy');
   Route::get('allCategory','CategoryController@allCategory')->name('allcategory');
-
+//category published
   Route::get('category-published','CategoryController@published')->name('category-published');
+  //category unpublished
   Route::get('category-unpublished','CategoryController@unpublished')->name('category-unpublished');
+  //pagination
+  Route::get('category-pagination','CategoryController@pagination')->name('category-pagination');
+  //search category
+  Route::get('search-category','CategoryController@search')->name('category-search');
+  
+  // subCategory route 
+  Route::resource('subcategory','SubCategoryController');
+  Route::get('subcategory.destroy/{id}','SubCategoryController@delete')->name('subcategory.destroy');
+  Route::get('allsubcategory','SubCategoryController@allsubcategory')->name('allsubcategory');
+  
+  //subcategory published
+  Route::get('subcategory-published','SubCategoryController@published')->name('subcategory-published');
+  //subcategory unpublished
+  Route::get('subcategory-unpublished','SubCategoryController@unpublished')->name('subcategory-unpublished');
+
+
+
+  //Brand controller 
+  Route::resource('brand','BrandController');
+  Route::get('all-brand','BrandController@allData')->name('allBrand');
+  Route::get('brand/destroy/{id}','BrandController@delete')->name('brand.destroy');
+  //subcategory published
+  Route::get('brand-published','BrandController@published')->name('brand-published');
+  //subcategory unpublished
+  Route::get('brand-unpublished','BrandController@unpublished')->name('brand-unpublished');
+  Route::get('brand-published','BrandController@published')->name('brand-published');
+
 
   });
 

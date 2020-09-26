@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\SubCategory;
 use App\Models\Category;
-class CategoryController extends Controller
+class SubCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,80 +15,42 @@ class CategoryController extends Controller
      */
     public function index()
     {
-      $data['categories']=Category::orderBy('id','desc')->paginate(5);
-      return view('admin.category.index',$data);
-    //   return response()->json($data);
-    }
-
-
-    public function allCategory(){
-        $data['categories']=Category::orderBy('id','desc')->paginate(5);
-        return view('admin.category.allCategory',$data);
+        $category = Category::latest()->get();
+        $subCategory = SubCategory::latest()->get();
+        return view('admin.subcategory.index',compact('category','subCategory'));
     }
 
 
 
-
-    //pagination 
-
-
-    public function pagination(){
-        $categories = Category::orderBy('id','desc')->paginate(5);
-        $s1 = 1;
-        return view('admin.category.paginate',compact("categories","s1"));
-
+    public function allsubcategory(){
+        $subCategory = SubCategory::latest()->get();
+        return view('admin.subcategory.response',compact('subCategory'));
     }
 
 
 
-    // search category 
+    //unpublished status 
 
-    public function search(Request $request){
-        
-        if($request->ajax()) {
-          
-            $data = Category::where('name', 'LIKE', $request->category.'%')
-                ->get();
-           
-           
-           
-            return $data;
-        }
+    public function unpublished(Request $request){
+        $subcategory = SubCategory::find($request->id);
+        $subcategory->status = 0;
+        $subcategory->save();
+        return response()->json($subcategory);
     }
+    //published status 
 
-
+    public function published(Request $request){
+        $subcategory = SubCategory::find($request->id);
+        $subcategory->status = 1;
+        $subcategory->save();
+        return response()->json($subcategory);
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
-    public function published(Request $request){
-
-        $category = Category::find($request->id);
-        $category->status = 1;
-        $category->save();
-        return response()->json($category);
-
-
-    }
-
-
-    public function unpublished(Request $request){
-
-
-        $category = Category::find($request->id);
-        $category->status = 0;
-        $category->save();
-        return response()->json($category);
-
-    }
-
-
-
-
     public function create()
     {
         //
@@ -101,10 +64,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->name = $request->category_name;
-        $category->save();
-        return response()->json($category);
+        $this->validate($request,[
+
+        ],[
+
+        ]);
+
+        $subCategory = new SubCategory();
+        $subCategory->category_id = $request->category;
+        $subCategory->subcategory_name = $request->subcategory_name;
+        $subCategory->description = $request->description;
+        $subCategory->save();
+        return response()->json($subCategory);
     }
 
     /**
@@ -115,7 +86,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $data = Category::find($id);
+        $data = SubCategory::find($id);
         return response()->json($data);
     }
 
@@ -127,7 +98,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $data = Category::find($id);
+        $data = SubCategory::find($id);
         return response()->json($data);
     }
 
@@ -140,11 +111,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request)
     {
+        $this->validate($request,[
+
+        ],[
+
+        ]);
+
         $id = $request->id;
-        $data = Category::find($id);
-        $data->name=$request->category;
+
+        $data = SubCategory::find($id);
+        $data->category_id=$request->categoryes_name;
+        $data->subcategory_name=$request->subcategory_name;
+        $data->description=$request->description;
         $data->save();
         return response()->json($id);
+
     }
 
     /**
@@ -155,7 +136,7 @@ class CategoryController extends Controller
      */
     public function delete($id)
     {
-        $data = Category::where("id",$id)->delete([
+        $data = SubCategory::find($id)->delete([
 
         ]);
         return response()->json($data);

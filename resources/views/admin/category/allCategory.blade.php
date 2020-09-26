@@ -1,4 +1,4 @@
-<table id="example1" class="table table-bordered table-striped">
+<table id="example1  searchResult" class="table table-bordered table-striped">
     <thead>
     <tr>
       <th>Sl.</th>
@@ -18,9 +18,9 @@
       <td>{{$data->name}}</td>
       <td>
         @if($data->status==1)
-        <button href="#" title="unpublished" onclick='unpublished("{{$data->id}}")' class="btn btn-sm btn-danger"><span class="fa fa-arrow-alt-circle-up"></span></button>
+        <button href="#" title="unpublished" onclick='unpublished("{{$data->id}}")' class=" btn btn-sm btn-success"><span class="fa fa-arrow-alt-circle-up"></span></button>
         @else
-        <button href="#" title="published" onclick='published("{{$data->id}}")'  class="btn btn-sm btn-success"><span class="fa fa-arrow-alt-circle-down"></span></button>
+        <button href="#" title="published" onclick='published("{{$data->id}}")'  class="btn btn-sm btn-danger"><span class="fa fa-arrow-alt-circle-down"></span></button>
       @endif
       </td>
       <td>{{ date("d-m-Y",strtotime($data->created_at))}}</td>
