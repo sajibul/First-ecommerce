@@ -12,7 +12,7 @@
       </a>
     </li>
 
-    <li class="nav-item has-treeview">
+  <li class="nav-item has-treeview {{Request::is('backend*') ? 'menu-open' : ' '}}">
       <a href="#" class="nav-link">
         <i class="nav-icon fas fa-copy"></i>
         <p>
@@ -23,21 +23,27 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{{route('category.index')}}" class="nav-link">
+          <a href="{{route('category.index')}}" class="nav-link {{Request::is('backend/category*') ? 'active' : ''}}">
             <i class="far fa-circle nav-icon"></i>
             <p>All Category</p>
           </a>
         </li>
         <li class="nav-item">
-        <a href="{{route('subcategory.index')}}" class="nav-link">
+        <a href="{{route('subcategory.index')}}" class="nav-link {{Request::is('backend/subcategory*') ? 'active' : ''}}">
             <i class="far fa-circle nav-icon"></i>
             <p>All SubCategory</p>
           </a>
         </li>
         <li class="nav-item">
-        <a href="{{route('brand.index')}}" class="nav-link">
+        <a href="{{route('brand.index')}}" class="nav-link  {{Request::is('backend/brand*') ? 'active' : ''}}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Brand</p>
+            <p>Brand Management</p>
+          </a>
+        </li>
+        <li class="nav-item">
+        <a href="{{route('color.index')}}" class="nav-link {{Request::is('backend/color*') ? 'active' : ''}}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Color Management</p>
           </a>
         </li>
       </ul>

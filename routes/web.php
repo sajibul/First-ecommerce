@@ -41,8 +41,17 @@ Auth::routes();
   Route::get('brand-published','BrandController@published')->name('brand-published');
   //subcategory unpublished
   Route::get('brand-unpublished','BrandController@unpublished')->name('brand-unpublished');
-  Route::get('brand-published','BrandController@published')->name('brand-published');
+  // Route::get('brand-published','BrandController@published')->name('brand-published');
+  
 
+  //Color controller 
+  
+  Route::resource('color','ColorController');
+  Route::get('color-published','ColorController@published')->name('color-published');
+  Route::get('color-unpublished','ColorController@unpublished')->name('color-unpublished');
+
+  //size controller 
+  Route::get('product-size','SizeController@index')->name('product-size');
 
   });
 
